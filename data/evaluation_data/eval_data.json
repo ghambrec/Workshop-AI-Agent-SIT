@@ -1,0 +1,50 @@
+{
+  "items": [
+    {
+      "question": "What is the best-selling item?",
+      "expected_output": "The Hoverboard is the best-selling item..",
+      "metadata": {
+        "expected_tool_calls": [
+          "fetch_store_data"
+        ]
+      }
+    },
+    {
+      "question": "How much is the keyboard?",
+      "expected_output": "It's 120 USD",
+      "metadata": {
+        "expected_tool_calls": [
+          "fetch_store_data"
+        ]
+      }
+    },
+    {
+      "question": "How many returns have been there for the Wireless Mouse?",
+      "expected_output": "There are 10 returns..",
+      "metadata": {
+        "expected_tool_calls": [
+          "fetch_store_data"
+        ]
+      }
+    },
+    {
+      "question": "Please restock the Hoverboard",
+      "expected_output": "The Hoverboard can not be restocked, since it has more then 5 items in stock.",
+      "metadata": {
+        "expected_tool_calls": [
+          "fetch_store_data"
+        ]
+      }
+    },
+    {
+      "question": "Please restock the Coffee Mug",
+      "expected_output": "Coffe mug restock order has been submitted. ",
+      "metadata":{
+        "expected_tool_calls": [
+          "fetch_store_data",
+          "place_restock_order"
+        ]
+      }
+    }
+  ]
+}
