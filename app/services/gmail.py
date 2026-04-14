@@ -1,0 +1,73 @@
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from google.auth.transport.requests import Request
+from googleapiclient.discovery import build
+from pathlib import Path
+import base64
+
+SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+CRED_FILE = BASE_DIR / "gmail_credentials.json"
+TOKEN_FILE = BASE_DIR / "token.json"
+
+def get_gmail_service():
+	"""Authenticate and return Gmail API Client."""
+	creds = None
+
+	if TOKEN_FILE.exists():
+		creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
+	
+	if not creds or not creds.valid:
+		if creds and creds.expired and creds.refresh_token:
+			creds.refresh(Request())
+		else:
+			flow = InstalledAppFlow.from_client_secrets_file(CRED_FILE, SCOPES)
+			creds = flow.run_local_server(port=0)
+	
+	with open(TOKEN_FILE, 'w') as token:
+		token.write(creds.to_json())
+	
+	return build("gmail", "v1", credentials=creds)
+
+
+def fetch_latest_unread_email():
+	"""Get newest unreaded email."""
+	service = get_gmail_service()
+
+	# list of unreaded mails
+	result = service.users().messages().list(
+		userId="me",
+		q="is:unread",
+		maxResults=1
+	).execute()
+
+	messages = result.get("messages", [])
+	if not messages:
+		return None
+
+	# load mail via id
+	msg = service.users().messages().get(
+		userId="me",
+		id=messages[0]["id"],
+		format="full"
+	).execute()
+
+	# read header
+	headers = msg["payload"]["headers"]
+	subject = next((h["value"] for h in headers if h["name"] == "Subject"), "")
+	sender = next((h["value"] for h in headers if h["name"] == "From"), "")
+
+	# extract mail body
+	body = ""
+	parts = msg["payload"].get("parts", [])
+	for part in parts:
+		if part["mimeType"] == "text/plain":
+			body = base64.urlsafe_b64decode(part["body"]["data"]).decode("utf-8")
+			break
+	
+	return {
+		"subject": subject,
+		"sender": sender,
+		"body": body
+	}

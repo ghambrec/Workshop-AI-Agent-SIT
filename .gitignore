@@ -11,6 +11,8 @@ wheels/
 .env
 gcloud.json
 store.json
+gmail_credentials.json
+token.json
 
 # Agent generated files
 data/order.json
