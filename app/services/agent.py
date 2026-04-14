@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 # 1. LOAD THE ENV BEFORE ANYTHING ELSE HAPPENS!
 load_dotenv()
 
-from langfuse import get_client
+# from langfuse import get_client
 from pydantic_ai import Agent
-from app.models.retail import AssistantResponse
+from app.models.order import Order
 from app.services.database import (
     get_all_product_data,
     execute_order,
@@ -15,13 +15,13 @@ from app.services.database import (
 )
 
 
-langfuse = get_client()
+# langfuse = get_client()
 
-# Verify connection
-if langfuse.auth_check():
-    print("Langfuse client is authenticated and ready!")
-else:
-    print("Authentication failed. Please check your credentials and host.")
+# # Verify connection
+# if langfuse.auth_check():
+#     print("Langfuse client is authenticated and ready!")
+# else:
+#     print("Authentication failed. Please check your credentials and host.")
 
 
 Agent.instrument_all()
@@ -64,8 +64,8 @@ def discount_category(category: str, percentage: int) -> str:
 
 retail_agent = Agent(
     "vertexai:gemini-2.5-flash",
-    output_type=AssistantResponse,
-    instrument=True,
+    output_type=Order,
+    # instrument=True,
     tools=[fetch_store_data, place_restock_order, adjust_price, discount_category],
     system_prompt=(
         "You are a helpful, conversational retail assistant. You answer questions about our products "

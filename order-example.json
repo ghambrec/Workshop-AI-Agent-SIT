@@ -1,0 +1,44 @@
+{
+  "customerId": "123456",
+  "shipper": {
+    "name": "Sample Company Warehouse",
+    "street": "Industriestraße 10",
+    "postalCode": "76131",
+    "city": "Karlsruhe",
+    "country": "DE",
+	"phone": "+49 123 456789"
+  },
+  "consignee": {
+    "name": "Destination Customer Inc.",
+    "street": "Hafenstraße 5",
+    "postalCode": "20095",
+    "city": "Hamburg",
+    "country": "DE",
+	"phone": "+49 123 456789"
+  },
+  "shipment": {
+    "reference": "REF-789456",
+    "goodsDescription": "Chairs",
+    "numberOfPackages": 2,
+    "weightKg": 2500,
+    "length": 500,
+    "width": 500,
+    "height": 1000
+  },
+  "schedule": {
+    "pickup": {
+      "date": "2026-04-15",
+      "timeWindowFrom": "08:00",
+      "timeWindowTo": "12:00"
+    },
+    "delivery": {
+      "date": "2026-04-16",
+      "timeWindowFrom": "09:00",
+      "timeWindowTo": "14:00"
+    }
+  },
+  "additionalServices": [
+    "Pre-notification",
+    "Insurance"
+  ]
+}
