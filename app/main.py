@@ -4,8 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from fastapi import FastAPI
-from app.routers.assistant import router
-
+from app.routers.order import router
 
 app = FastAPI(title="Retail Agent API")
 app.include_router(router)

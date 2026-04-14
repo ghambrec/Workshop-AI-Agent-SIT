@@ -11,3 +11,6 @@ wheels/
 .env
 gcloud.json
 store.json
+
+# Agent generated files
+data/order.json
