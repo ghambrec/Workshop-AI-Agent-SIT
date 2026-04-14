@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from pydantic_ai.messages import ModelMessage
-from app.services.agent import retail_agent
+from app.services.agent import order_agent
 
 router = APIRouter(prefix="/assistant")
 
@@ -42,7 +42,7 @@ async def ask_assistant(query: UserQuery):
     history = chat_sessions.get(query.session_id, [])
 
     # 2. Run the agent, passing in the history so it remembers the chat
-    result = await retail_agent.run(query.prompt, message_history=history)
+    result = await order_agent.run(query.prompt, message_history=history)
 
     # 3. Save the newly updated history back into our dictionary
     # result.all_messages() contains the old history PLUS the new request/response

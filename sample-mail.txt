@@ -1,0 +1,44 @@
+Hello,
+
+we would like to place a transport order with your company.
+
+Customer ID: 131001
+
+Pickup (shipper):
+ACME Electronics GmbH
+Industriestraße 12
+76131 Karlsruhe
+Germany
+Phone: +49 721 123456
+
+Delivery (consignee):
+Tech Distribution BV
+Keizersgracht 100
+1015 CN Amsterdam
+Netherlands
+Phone: +31 20 5551234
+
+Shipment details:
+We are shipping 8 pallets of electronic components (circuit boards and accessories).
+Total weight is 1200 kg.
+Dimensions per shipment: 120 cm length, 80 cm width, 160 cm height.
+Reference number: REF-ACME-2026-7788
+
+Pickup time window:
+Date: 2026-04-20
+Time: from 08:00 to 12:00
+
+Delivery time window:
+Date: 2026-04-22
+Time: from 09:00 to 14:00
+
+Additional services requested:
+- Pre-notification
+- Insurance
+
+Please confirm the booking and let us know if you need any further information.
+
+Best regards,
+John Miller
+Logistics Manager
+ACME Electronics GmbH
