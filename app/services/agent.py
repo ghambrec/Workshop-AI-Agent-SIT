@@ -7,7 +7,8 @@ load_dotenv()
 from pathlib import Path
 from langfuse import get_client
 from pydantic_ai import Agent
-from app.models.order import Order
+from app.models.order import AgentResponse
+from app.services.gmail import send_mail
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 PROMPT_DIR = BASE_DIR / "app/prompts"
@@ -26,21 +27,21 @@ Agent.instrument_all()
 
 
 # ---------------------------------------------------------
-# 2. DEFINE TOOLS FIRST (No decorators needed!)
+# DEFINE TOOLS FIRST (No decorators needed!)
 # ---------------------------------------------------------
 
 
 
 # ---------------------------------------------------------
-# 3. INITIALIZE THE AGENT
+# INITIALIZE THE AGENT
 # ---------------------------------------------------------
 
 soul_prompt = Path(SOUL_MD).read_text(encoding="utf-8")
 
 order_agent = Agent(
     "vertexai:gemini-2.5-flash",
-    output_type=Order,
+    output_type=AgentResponse,
     instrument=True,
-    # tools=[],
+    tools=[send_mail],
     system_prompt=soul_prompt,
 )

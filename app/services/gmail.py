@@ -3,6 +3,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.discovery import build
 from pathlib import Path
+from email.mime.text import MIMEText
 import base64
 
 SCOPES = [
@@ -77,3 +78,23 @@ def fetch_latest_unread_email():
 		"thread_id": msg["threadId"],
 		"message_id": message_id
 	}
+
+def send_mail(to:str, subject:str, body:str, thread_id:str, message_id:str) -> str:
+	"""Sends reply email in the context of an existing thread."""
+	print("SEND_MAIL FUNCTION CALLED")
+	service = get_gmail_service()
+
+	message = MIMEText(body)
+	message["to"] = to
+	message["subject"] = subject
+	message["In-Reply-To"] = message_id
+	message["References"] = message_id
+
+	raw = base64.urlsafe_b64encode(message.as_bytes()).decode()
+
+	service.users().messages().send(
+		userId="me",
+		body={"raw": raw, "threadId": thread_id}
+	).execute()
+
+	return f"E-Mail send to {to}"

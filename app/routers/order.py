@@ -25,6 +25,7 @@ async def process_mail():
     prompt = f"""
     Message-ID: {mail_context["message_id"]}
     Thread-ID: {mail_context["thread_id"]}
+    From: {mail_context["sender"]}
     Subject: {mail_context["subject"]}
     Body:
     {mail_context["body"]}"""

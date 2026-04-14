@@ -39,3 +39,9 @@ class Order(BaseModel):
     shipment: Shipment = Field(description="Details of the shipment including dimensions and weight")
     schedule: Schedule = Field(description="Pickup and delivery scheduling information")
     additionalServices: List[str] | None = Field(default=None, description="Optional list of additional logistics services such as pre-notification or insurance")
+
+class AgentResponse(BaseModel):
+    status: str = Field(description="'complete' if all required fields are present, 'incomplete' if at least one field is missing")
+    missing_fields: List[str] | None = Field(description="List of missing required field names. Only set if status is 'incomplete'")
+    email_sent: bool = Field(description="Set it to True ONLY after you have called the send_mail tool. NEVER set to True without calling it first")
+    order: Order | None = Field(description="The extracted order. None if extraction completely failed")
