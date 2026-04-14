@@ -5,7 +5,10 @@ from googleapiclient.discovery import build
 from pathlib import Path
 import base64
 
-SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
+SCOPES = [
+	"https://www.googleapis.com/auth/gmail.readonly",
+	"https://www.googleapis.com/auth/gmail.send"
+	]
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 CRED_FILE = BASE_DIR / "gmail_credentials.json"
@@ -57,6 +60,7 @@ def fetch_latest_unread_email():
 	headers = msg["payload"]["headers"]
 	subject = next((h["value"] for h in headers if h["name"] == "Subject"), "")
 	sender = next((h["value"] for h in headers if h["name"] == "From"), "")
+	message_id = next((h["value"] for h in headers if h["name"] == "Message-ID"), "")
 
 	# extract mail body
 	body = ""
@@ -69,5 +73,7 @@ def fetch_latest_unread_email():
 	return {
 		"subject": subject,
 		"sender": sender,
-		"body": body
+		"body": body,
+		"thread_id": msg["threadId"],
+		"message_id": message_id
 	}

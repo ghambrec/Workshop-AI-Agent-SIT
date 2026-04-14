@@ -21,7 +21,14 @@ async def process_mail():
     mail_context = fetch_latest_unread_email()
     if not mail_context:
         raise HTTPException(status_code=404, detail="No unreaded mail found!")
-    prompt = f"Subject: {mail_context["subject"]}\n\nBody:\n{mail_context["body"]}"
+
+    prompt = f"""
+    Message-ID: {mail_context["message_id"]}
+    Thread-ID: {mail_context["thread_id"]}
+    Subject: {mail_context["subject"]}
+    Body:
+    {mail_context["body"]}"""
+
     result = await order_agent.run(prompt)
     write_order(result.output)
     return result.output
