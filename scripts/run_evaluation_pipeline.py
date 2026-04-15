@@ -61,8 +61,10 @@ async def call_agent(*, item: DatasetItem, **kwargs):
     
     output = run_results.output
     summary = f"Status: {output.status}"
+    if output.status == "complete" and output.order:
+        summary += f"\nOrder:\n- Shipper: {output.order.shipper.name}\n- Consignee: {output.order.consignee.name}\n- Goods: {output.order.shipment.goodsDescription}"
     if output.missing_fields:
-        summary += f". Missing: {', '.join(output.missing_fields)}"
+        summary += f"\nMissing: {', '.join(output.missing_fields)}"
     return {
         "output": summary,
         "eval_metadata": {"tool_calls": extract_tool_calls(run_results)},

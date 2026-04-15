@@ -2,7 +2,7 @@
   "items": [
     {
       "question": "Subject: Shipment Request - Customer 10042\n\nHello,\n\nwe would like to place the following shipment order:\n\nCustomer ID: 10042\n\nShipper:\nTech Supplies GmbH\nIndustriestrasse 14\n80339 Munich\nGermany\nPhone: +49 89 123456\n\nConsignee:\nLogistics Partner AG\nHauptstrasse 22\n10115 Berlin\nGermany\nPhone: +49 30 654321\n\nShipment Details:\nGoods: Electronic components\nPackages: 3\nWeight: 120 kg\nDimensions: 80 x 60 x 50 cm\n\nPickup: 2026-04-22, between 08:00 and 12:00\nDelivery: 2026-04-23, between 10:00 and 16:00\n\nAdditional services: Pre-notification\n\nBest regards,\nThomas Müller",
-      "expected_output": "Status: complete",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Tech Supplies GmbH\n- Consignee: Logistics Partner AG\nGoods: Electronic components",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
