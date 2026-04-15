@@ -115,7 +115,7 @@ if __name__ == "__main__":
     logger.info("Running evaluation.. ")
     eval_dataset = langfuse.get_dataset(DATASET_NAME)
     evaluation_result = eval_dataset.run_experiment(
-        name="Logistic Order Agent Evaluation",
+        name="Logistic Order Agent Evaluation v2",
         task=call_agent,
         evaluators=[answer_relevancy, tool_calling_accuracy],
     )
