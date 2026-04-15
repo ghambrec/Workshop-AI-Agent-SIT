@@ -23,6 +23,7 @@ STEP 1 - Call the send_mail tool FIRST:
 - If status is 'incomplete': send an email listing exactly which fields are missing and ask the sender to provide them
 - Use the Thread-ID and Message-ID from the prompt to reply in the correct thread
 - Use the From address as the recipient
+- Always pass the full email body from the prompt as quoted_text to send_mail so the reply contains the full conversation history
 - Only after send_mail has been called successfully, you may set email_sent = True
 
 STEP 2 - Return the structured AgentResponse object:

@@ -79,12 +79,15 @@ def fetch_latest_unread_email():
 		"message_id": message_id
 	}
 
-def send_mail(to:str, subject:str, body:str, thread_id:str, message_id:str) -> str:
+def send_mail(to:str, subject:str, body:str, thread_id:str, message_id:str, quoted_text:str|None=None) -> str:
 	"""Sends reply email in the context of an existing thread."""
 	print("SEND_MAIL FUNCTION CALLED")
 	service = get_gmail_service()
 
-	message = MIMEText(body)
+	full_body = body
+	if quoted_text:
+		full_body += f"\n\n--- Original Message ---\n{quoted_text}"
+	message = MIMEText(full_body)
 	message["to"] = to
 	message["subject"] = subject
 	message["In-Reply-To"] = message_id
