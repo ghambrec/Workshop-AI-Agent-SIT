@@ -62,7 +62,15 @@ async def call_agent(*, item: DatasetItem, **kwargs):
     output = run_results.output
     summary = f"Status: {output.status}"
     if output.status == "complete" and output.order:
-        summary += f"\nOrder:\n- Shipper: {output.order.shipper.name}\n- Consignee: {output.order.consignee.name}\n- Goods: {output.order.shipment.goodsDescription}"
+        summary += (
+            f"\nOrder:\n"
+            f"- Shipper: {output.order.shipper.name}\n"
+            f"- Consignee: {output.order.consignee.name}\n"
+            f"- Goods: {output.order.shipment.goodsDescription}\n"
+            f"- Weight: {output.order.shipment.weightKg} kg\n"
+            f"- Length: {output.order.shipment.lengthCm} cm\n"
+            f"- Pickup: {output.order.schedule.pickup.date}"
+        )
     if output.missing_fields:
         summary += f"\nMissing: {', '.join(output.missing_fields)}"
     return {

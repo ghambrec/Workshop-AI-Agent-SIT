@@ -2,70 +2,70 @@
   "items": [
     {
       "question": "Subject: Shipment Request - Customer 10042\n\nHello,\n\nwe would like to place the following shipment order:\n\nCustomer ID: 10042\n\nShipper:\nTech Supplies GmbH\nIndustriestrasse 14\n80339 Munich\nGermany\nPhone: +49 89 123456\n\nConsignee:\nLogistics Partner AG\nHauptstrasse 22\n10115 Berlin\nGermany\nPhone: +49 30 654321\n\nShipment Details:\nGoods: Electronic components\nPackages: 3\nWeight: 120 kg\nDimensions: 80 x 60 x 50 cm\n\nPickup: 2026-04-22, between 08:00 and 12:00\nDelivery: 2026-04-23, between 10:00 and 16:00\n\nAdditional services: Pre-notification\n\nBest regards,\nThomas Müller",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Tech Supplies GmbH\n- Consignee: Logistics Partner AG\nGoods: Electronic components\nWeight: 120 kg\nDimensions: 80 x 60 x 50 cm\nPickup: 2026-04-22",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Tech Supplies GmbH\n- Consignee: Logistics Partner AG\n- Goods: Electronic components\n- Weight: 120 kg\n- Length: 80 cm\n- Pickup: 2026-04-22",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Transport inquiry\n\nHello,\n\nwe need a transport from Hamburg to Vienna.\n\nShipper:\nFast Cargo Ltd\nHafenstrasse 5\n20457 Hamburg\nGermany\n\nShipment Details:\nGoods: Machine parts\nPackages: 2\nWeight: 340 kg\nDimensions: 100 x 80 x 75 cm\n\nPickup: 2026-04-25\n\nBest regards,\nAnna Schmidt",
-      "expected_output": "Status: incomplete. Missing: customerId, consignee",
+      "expected_output": "Status: incomplete\nMissing: customerId, consignee",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Transport Order - Customer 20011\n\nHello team,\n\nplease arrange shipment:\n\nCustomer ID: 20011\n\nShipper:\nAlpine Parts AG\nBahnhofstrasse 3\n8001 Zurich\nSwitzerland\nPhone: +41 44 111222\n\nConsignee:\nNordic Machines AB\nStorgatan 5\n11455 Stockholm\nSweden\nPhone: +46 8 998877\n\nShipment Details:\nGoods: Steel components\nPackages: 5\nWeight: 0.5 t\nDimensions: 1.2 x 0.8 x 0.6 m\n\nPickup: 22/04/2026, 09:00-14:00\nDelivery: 24/04/2026, 08:00-12:00\n\nRegards,\nAnna Keller",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Alpine Parts AG\n- Consignee: Nordic Machines AB\nGoods: Steel components\nWeight: 500 kg\nDimensions: 120 x 80 x 60 cm\nPickup: 2026-04-22",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Alpine Parts AG\n- Consignee: Nordic Machines AB\n- Goods: Steel components\n- Weight: 500 kg\n- Length: 120 cm\n- Pickup: 2026-04-22",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Shipment Booking - Customer 30555\n\nHi,\n\nCustomer ID: 30555\n\nShipper:\nFresh Foods Ltd\nMarket Street 10\nDublin\nIreland\nPhone: +353 1 222333\n\nConsignee:\nBerlin Retail GmbH\nAlexanderplatz 1\n10178 Berlin\nGermany\nPhone: +49 30 987654\n\nShipment Details:\nGoods: Frozen food\nPackages: 10\nWeight: 2200 lbs\nDimensions: 40 x 48 x 60 in\n\nPickup: April 25, 2026, 07:00-11:00\nDelivery: April 27, 2026\n\nThanks,\nJohn O'Brien",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Fresh Foods Ltd\n- Consignee: Berlin Retail GmbH\nGoods: Frozen food\nWeight: 998 kg\nDimensions: 102 x 122 x 152 cm\nPickup: 2026-04-25",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Fresh Foods Ltd\n- Consignee: Berlin Retail GmbH\n- Goods: Frozen food\n- Weight: 998 kg\n- Length: 102 cm\n- Pickup: 2026-04-25",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Logistics Request - Customer 77881\n\nDear Sir or Madam,\n\nCustomer ID: 77881\n\nShipper:\nAuto Parts Polska\nul. Krakowska 22\n31-062 Krakow\nPoland\n\nConsignee:\nVienna Motors GmbH\nRingstrasse 7\n1010 Vienna\nAustria\n\nShipment Details:\nGoods: Engine parts\nPackages: 2\nWeight: 75000 g\nDimensions: 200 x 100 x 50 cm\n\nPickup: 2026.04.21\nDelivery: 2026.04.22\n\nKind regards,\nPiotr Nowak",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Auto Parts Polska\n- Consignee: Vienna Motors GmbH\nGoods: Engine parts\nWeight: 75 kg\nDimensions: 200 x 100 x 50 cm\nPickup: 2026-04-21",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Auto Parts Polska\n- Consignee: Vienna Motors GmbH\n- Goods: Engine parts\n- Weight: 75 kg\n- Length: 200 cm\n- Pickup: 2026-04-21",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Shipment Inquiry - Customer 88992\n\nHello,\n\nCustomer ID: 88992\n\nShipper:\nGlassworks BV\nKeizersgracht 12\n1015 Amsterdam\nNetherlands\n\nConsignee:\nParis Design SARL\nRue de Rivoli 8\n75001 Paris\nFrance\n\nShipment Details:\nGoods: Glass panels\nPackages: 4\nWeight: 1.2 tonnes\nDimensions: 1500 x 800 x 20 mm\n\nPickup: 21-04-2026\nDelivery: 22-04-2026\n\nBest,\nLars de Vries",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Glassworks BV\n- Consignee: Paris Design SARL\nGoods: Glass panels\nWeight: 1200 kg\nDimensions: 150 x 80 x 2 cm\nPickup: 2026-04-21",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Glassworks BV\n- Consignee: Paris Design SARL\n- Goods: Glass panels\n- Weight: 1200 kg\n- Length: 150 cm\n- Pickup: 2026-04-21",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Freight Order - Customer 99123\n\nHello team,\n\nCustomer ID: 99123\n\nShipper:\nElectroWorld Inc\n5th Avenue 77\nNew York, NY\nUSA\n\nConsignee:\nMadrid Tech SL\nGran Via 45\n28013 Madrid\nSpain\n\nShipment Details:\nGoods: Consumer electronics\nPackages: 6\nWeight: 300 kg\nDimensions: 90 x 70 x 60 cm\n\nPickup: 2026/04/23\nDelivery: 2026/04/25\n\nRegards,\nMichael Smith",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: ElectroWorld Inc\n- Consignee: Madrid Tech SL\nGoods: Consumer electronics\nWeight: 300 kg\nDimensions: 90 x 70 x 60 cm\nPickup: 2026-04-23",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: ElectroWorld Inc\n- Consignee: Madrid Tech SL\n- Goods: Consumer electronics\n- Weight: 300 kg\n- Length: 90 cm\n- Pickup: 2026-04-23",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Shipping Order - Customer 66778\n\nHi,\n\nCustomer ID: 66778\n\nShipper:\nNord Timber AS\nHavnaveien 9\n5003 Bergen\nNorway\n\nConsignee:\nCopenhagen Build ApS\nNyhavn 1\n1051 Copenhagen\nDenmark\n\nShipment Details:\nGoods: Wood planks\nPackages: 8\nWeight: 2.5 t\nDimensions: 2.5 x 0.3 x 0.2 m\n\nPickup: 23rd April 2026\nDelivery: 26th April 2026\n\nThanks,\nOla Hansen",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Nord Timber AS\n- Consignee: Copenhagen Build ApS\nGoods: Wood planks\nWeight: 2500 kg\nDimensions: 250 x 30 x 20 cm\nPickup: 2026-04-23",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Nord Timber AS\n- Consignee: Copenhagen Build ApS\n- Goods: Wood planks\n- Weight: 2500 kg\n- Length: 250 cm\n- Pickup: 2026-04-23",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Delivery Request - Customer 44321\n\nDear logistics team,\n\nCustomer ID: 44321\n\nShipper:\nPharma Labs Ltd\nKing Street 20\nLondon\nUK\n\nConsignee:\nRome Medical SRL\nVia Roma 10\n00100 Rome\nItaly\n\nShipment Details:\nGoods: Medical supplies\nPackages: 3\nWeight: 85000 grams\nDimensions: 600 x 400 x 300 mm\n\nPickup: 2026-04-20\nDelivery: 2026-04-22\n\nKind regards,\nEmily Brown",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Pharma Labs Ltd\n- Consignee: Rome Medical SRL\nGoods: Medical supplies\nWeight: 85 kg\nDimensions: 60 x 40 x 30 cm\nPickup: 2026-04-20",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Pharma Labs Ltd\n- Consignee: Rome Medical SRL\n- Goods: Medical supplies\n- Weight: 85 kg\n- Length: 60 cm\n- Pickup: 2026-04-20",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
     },
     {
       "question": "Subject: Shipment Order - Customer 55566\n\nHello,\n\nCustomer ID: 55566\n\nShipper:\nTextile Group SA\nCalle Mayor 12\n28001 Madrid\nSpain\n\nConsignee:\nLisbon Fashion Lda\nRua Augusta 55\n1100 Lisbon\nPortugal\n\nShipment Details:\nGoods: Clothing\nPackages: 12\nWeight: 180 kg\nDimensions: 100 x 50 x 40 cm\n\nPickup: 20.04.2026\nDelivery: 21.04.2026\n\nBest regards,\nCarlos Ruiz",
-      "expected_output": "Status: complete\nOrder:\n- Shipper: Textile Group SA\n- Consignee: Lisbon Fashion Lda\nGoods: Clothing\nWeight: 180 kg\nDimensions: 100 x 50 x 40 cm\nPickup: 2026-04-20",
+      "expected_output": "Status: complete\nOrder:\n- Shipper: Textile Group SA\n- Consignee: Lisbon Fashion Lda\n- Goods: Clothing\n- Weight: 180 kg\n- Length: 100 cm\n- Pickup: 2026-04-20",
       "metadata": {
         "expected_tool_calls": ["send_mail"]
       }
