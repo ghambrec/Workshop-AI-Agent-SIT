@@ -1,3 +1,6 @@
+import os
+os.environ["EVAL_MODE"] = "1"
+
 from langfuse.api import NotFoundError, DatasetItem
 from langfuse.experiment import ExperimentResult, ExperimentItemResult
 from loguru import logger
@@ -6,7 +9,6 @@ from app.models.evaluation import EvalSuite
 from app.services.agent import order_agent
 from app.services.langfuse_client import langfuse_client as langfuse
 from app.evaluation.utils import extract_tool_calls
-from unittest.mock import patch
 
 from app.services.database import DATA_DIR
 
@@ -55,8 +57,7 @@ def upload_evaluation_data(evaluation_data: EvalSuite) -> bool:
 
 # Define your task function
 async def call_agent(*, item: DatasetItem, **kwargs):
-    with patch("app.services.gmail.send_mail", return_value="E-Mail sent (mocked)"):
-        run_results = await order_agent.run(item.input["question"])
+    run_results = await order_agent.run(item.input["question"])
     
     output = run_results.output
     summary = f"Status: {output.status}"
@@ -82,7 +83,7 @@ def create_annotation_results(eval_results: ExperimentResult):
 
     queue = langfuse.api.annotation_queues.create_queue(
         name="queue: " + eval_results.run_name,
-        score_config_ids=["cmnvjr511000aqf06j49s7ixw"],
+        score_config_ids=["cmnxbme10000klr07c2461qtw"],
     )
 
     item: ExperimentItemResult

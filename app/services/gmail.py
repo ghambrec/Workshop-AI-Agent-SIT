@@ -5,6 +5,7 @@ from googleapiclient.discovery import build
 from pathlib import Path
 from email.mime.text import MIMEText
 import base64
+import os
 
 SCOPES = [
 	"https://www.googleapis.com/auth/gmail.readonly",
@@ -82,6 +83,9 @@ def fetch_latest_unread_email():
 def send_mail(to:str, subject:str, body:str, thread_id:str, message_id:str, quoted_text:str|None=None) -> str:
 	"""Sends reply email in the context of an existing thread."""
 	print("SEND_MAIL FUNCTION CALLED")
+	if os.getenv("EVAL_MODE"):
+		print(f"SEND_MAIL MOCKED to {to}")
+		return f"Email sent (mocked) to {to}"
 	service = get_gmail_service()
 
 	full_body = body
