@@ -3,9 +3,10 @@ from langfuse.experiment import ExperimentResult, ExperimentItemResult
 from loguru import logger
 from app.evaluation.evaluators import answer_relevancy, tool_calling_accuracy
 from app.models.evaluation import EvalSuite
-from app.services.agent import retail_agent
+from app.services.agent import order_agent
 from app.services.langfuse_client import langfuse_client as langfuse
 from app.evaluation.utils import extract_tool_calls
+from unittest.mock import patch
 
 from app.services.database import DATA_DIR
 
@@ -54,10 +55,15 @@ def upload_evaluation_data(evaluation_data: EvalSuite) -> bool:
 
 # Define your task function
 async def call_agent(*, item: DatasetItem, **kwargs):
-    run_results = await retail_agent.run(item.input["question"])
-
+    with patch("app.services.gmail.send_mail", return_value="E-Mail sent (mocked)"):
+        run_results = await order_agent.run(item.input["question"])
+    
+    output = run_results.output
+    summary = f"Status: {output.status}"
+    if output.missing_fields:
+        summary += f". Missing: {', '.join(output.missing_fields)}"
     return {
-        "output": run_results.output.message,
+        "output": summary,
         "eval_metadata": {"tool_calls": extract_tool_calls(run_results)},
     }
 
@@ -98,7 +104,7 @@ if __name__ == "__main__":
     logger.info("Running evaluation.. ")
     eval_dataset = langfuse.get_dataset(DATASET_NAME)
     evaluation_result = eval_dataset.run_experiment(
-        name="Retail Agent Evaluation",
+        name="Logistic Order Agent Evaluation",
         task=call_agent,
         evaluators=[answer_relevancy, tool_calling_accuracy],
     )

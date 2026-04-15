@@ -1,49 +1,17 @@
 {
   "items": [
     {
-      "question": "What is the best-selling item?",
-      "expected_output": "The Hoverboard is the best-selling item..",
+      "question": "Subject: Shipment Request - Customer 10042\n\nHello,\n\nwe would like to place the following shipment order:\n\nCustomer ID: 10042\n\nShipper:\nTech Supplies GmbH\nIndustriestrasse 14\n80339 Munich\nGermany\nPhone: +49 89 123456\n\nConsignee:\nLogistics Partner AG\nHauptstrasse 22\n10115 Berlin\nGermany\nPhone: +49 30 654321\n\nShipment Details:\nGoods: Electronic components\nPackages: 3\nWeight: 120 kg\nDimensions: 80 x 60 x 50 cm\n\nPickup: 2026-04-22, between 08:00 and 12:00\nDelivery: 2026-04-23, between 10:00 and 16:00\n\nAdditional services: Pre-notification\n\nBest regards,\nThomas Müller",
+      "expected_output": "Order successfully extracted. Shipper: Tech Supplies GmbH, Munich. Consignee: Logistics Partner AG, Berlin. Confirmation email sent to sender.",
       "metadata": {
-        "expected_tool_calls": [
-          "fetch_store_data"
-        ]
+        "expected_tool_calls": ["send_mail"]
       }
     },
     {
-      "question": "How much is the keyboard?",
-      "expected_output": "It's 120 USD",
+      "question": "Subject: Transport inquiry\n\nHello,\n\nwe need a transport from Hamburg to Vienna.\n\nShipper:\nFast Cargo Ltd\nHafenstrasse 5\n20457 Hamburg\nGermany\n\nShipment Details:\nGoods: Machine parts\nPackages: 2\nWeight: 340 kg\nDimensions: 100 x 80 x 75 cm\n\nPickup: 2026-04-25\n\nBest regards,\nAnna Schmidt",
+      "expected_output": "Incomplete order. Missing fields: customerId, consignee. Agent requests missing information from sender.",
       "metadata": {
-        "expected_tool_calls": [
-          "fetch_store_data"
-        ]
-      }
-    },
-    {
-      "question": "How many returns have been there for the Wireless Mouse?",
-      "expected_output": "There are 10 returns..",
-      "metadata": {
-        "expected_tool_calls": [
-          "fetch_store_data"
-        ]
-      }
-    },
-    {
-      "question": "Please restock the Hoverboard",
-      "expected_output": "The Hoverboard can not be restocked, since it has more then 5 items in stock.",
-      "metadata": {
-        "expected_tool_calls": [
-          "fetch_store_data"
-        ]
-      }
-    },
-    {
-      "question": "Please restock the Coffee Mug",
-      "expected_output": "Coffe mug restock order has been submitted. ",
-      "metadata":{
-        "expected_tool_calls": [
-          "fetch_store_data",
-          "place_restock_order"
-        ]
+        "expected_tool_calls": ["send_mail"]
       }
     }
   ]
